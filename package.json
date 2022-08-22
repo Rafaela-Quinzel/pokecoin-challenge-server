@@ -2,7 +2,7 @@
   "name": "pokecoin-challenge",
   "version": "1.0.0",
   "engines": {
-    "node": "16.x4.0",
+    "node": "16.4.0",
     "npm": "7.18.1"
   },
   "description": "Pokemon trades calculator, so that the user can calculate if your Pokémon portfolio is valuing and how.",
