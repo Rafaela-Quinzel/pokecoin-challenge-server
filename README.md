@@ -16,16 +16,12 @@ Esse projeto foi desenvolvido utilizando as API'S [Pokemon](https://pokeapi.co/d
 
 ### :point_right: Tecnologias 
 
-- React
 - Node
 - JavaScript
 - Mongoose
 - Express
 - Axios
 - Jsonwebtoken
-- Material-ui
-- Css
-- Styled-components
 
 ## Pré-requisitos
 
