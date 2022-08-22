@@ -1,1 +1,1 @@
-web: npm start
+web: voila --port=$PORT --no-browser app.ipynb
