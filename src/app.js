@@ -7,7 +7,8 @@ const cookieParser = require('cookie-parser');
 const indexRouter = require('./routes/index');
 const mongodb = require('./config/mongodb');
 const DATABASE_URL = mongodb.mongodb_host;
-const PORT = mongodb.mongodb_port;
+const PORT = process.env.DB_PORT || 27017;
+//const PORT = mongodb.mongodb_port;
 
 const app = express();
 
