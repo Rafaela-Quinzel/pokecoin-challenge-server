@@ -7,7 +7,7 @@
 <br>
 
 
-:construction: > O Projeto está em andamento, então bugs ainda estão sendo corrigidos :)
+:construction_worker: :construction: O Projeto em processo de aualizações e correções :)
 <br>
 
 Esse projeto foi desenvolvido utilizando as API'S [Pokemon](https://pokeapi.co/docs/v2) e [Bitcoin](https://www.mercadobitcoin.com.br/api-doc/). A ideia do projeto é criar uma plataforma onde o usuário compra e vende pokemons e os valores são em Bitcoin, baseado no "base_experience" de cada pokemon.
