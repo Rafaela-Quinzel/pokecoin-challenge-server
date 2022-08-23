@@ -1,6 +1,6 @@
 # pokecoin-challenge-server
 
-<h1>PokeCoin</h1>
+<h1>PokeCoin <a href="https://emoji.gg/emoji/pokeball"><img src="https://cdn3.emoji.gg/emojis/pokeball.png" width="28px" height="28px" alt="pokeball"></a></h1>
 
 <h2 align="center">
 </h2>
@@ -33,7 +33,7 @@ Esse projeto foi desenvolvido utilizando as API'S [Pokemon](https://pokeapi.co/d
 
 ```bash
 # Clonando o repositorio:
-$ git clone https://github.com/Rafaela-Quinzel/pokecoin-challenge.git
+$ git clone https://github.com/Rafaela-Quinzel/pokecoin-challenge-server.git
 
 # Rodar o projeto:
 npm start
