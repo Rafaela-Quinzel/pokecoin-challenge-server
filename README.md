@@ -1,4 +1,4 @@
-# pokecoin-challenge-app
+# pokecoin-challenge-server
 
 <h1>PokeCoin</h1>
 
@@ -34,12 +34,13 @@ Esse projeto foi desenvolvido utilizando as API'S [Pokemon](https://pokeapi.co/d
 ```bash
 # Clonando o repositorio:
 $ git clone https://github.com/Rafaela-Quinzel/pokecoin-challenge.git
-# Acessesando as pastas via terminal:
-$ cd backend
-$ cd frontend
+
+# Rodar o projeto:
+npm start
+
 # Instalando as dependências (dentro de cada pasta):
 npm install
 ```
 
-Em cada repositório possui um arquivo .env.example, basta editar o nome do arquivo retirando o .exemple, as configurações de consulta das API já estão no arquivo junto com outras informações mas sinta se a vontade para realizar as suas alterações.
+O repositório possui um arquivo .env.example, basta editar o nome do arquivo retirando o .exemple, as configurações de consulta das API já estão no arquivo junto com outras informações mas sinta se a vontade para realizar as suas alterações.
 
