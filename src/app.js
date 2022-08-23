@@ -22,7 +22,7 @@ app.use('/', indexRouter);
 
 mongoose.connect(DATABASE_URL);
 
-console.log(`Listen on http://localhost:${PORT}`);
+console.log(`App is running at th port:${PORT}`);
 
 app.listen(PORT);
 
