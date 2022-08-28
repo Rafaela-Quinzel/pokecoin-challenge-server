@@ -12,19 +12,19 @@ class UsersController {
 
             let userEmail = await User.findOne({ email })
 
-            if (userEmail) return res.status(400).send({ error: 'User already exists' });
+            if (userEmail) return res.status(400).json({ message: error.message || 'User already exists' });
 
             const user = await User.create(req.body);
 
             user.password = undefined;
 
-            return res.send({
+            return res.json({
                 user,
                 token: await helpers.generateToken({ id: user._id })
             });
 
         } catch (error) {
-            return res.status(404).send({ error: 'Registration failed' });
+            return res.status(error.status || 404).json({ message: error.message || 'Registration failed' });
         }
     }
 
@@ -35,19 +35,19 @@ class UsersController {
         try {
             const user = await User.findOne({ email }).select('+password');
 
-            if (!user) return res.status(400).send({ error: 'User not found' });
+            if (!user) return res.status(400).json({ message: error.message || 'User not found' });
            
             if (!await bcrypt.compare(password, user.password)) return res.status(400).send({ error: 'Invalid user or password' });
             
             user.password = undefined;
 
-            return res.send({
+            return res.json({
                 user,
                 token: await helpers.generateToken({ id: user._id })
             });
 
         } catch (error) {
-            return res.status(404).send({ error: 'Registration failed' });
+            return res.status(error.status || 404).json({ message: error.message || 'Login failed' });
         }
     }
 }

@@ -51,7 +51,7 @@ class TransactionsController {
 
                 await transactions.create(data);
 
-                return res.send(updatePokemon);
+                return res.json(updatePokemon);
 
             } else if (!verifyUserHasPokemon) {
 
@@ -80,11 +80,12 @@ class TransactionsController {
                 };
 
                 await transactions.create(data);
-                return res.send(updateWallet);
+
+                return res.json(updateWallet);
             }
 
         } catch (error) {
-            return res.status(500).send({ error: 'Error on api' });
+            return res.status(error.status || 500).json({ message: error.message || 'Error on api' });
         }
     }
 
@@ -138,7 +139,7 @@ class TransactionsController {
 
                 await transactions.create(data);
 
-                return res.send(removePokemon);
+                return res.json(removePokemon);
 
             } else {
                 const updatePokemon = await User.updateOne(
@@ -162,11 +163,11 @@ class TransactionsController {
 
                 await transactions.create(data);
 
-                return res.send(updatePokemon);
+                return res.json(updatePokemon);
             }
 
         } catch (error) {
-            return res.status(500).send({ error: 'Error on api' });
+            return res.status(error.status || 500).json({ message: error.message || 'Error on api' });
         }
     }
 
@@ -176,10 +177,10 @@ class TransactionsController {
 
             const transactions = await helpers.getTransactionsUser(userId);
         
-            return res.send({ transactions });
+            return res.json(transactions);
             
         } catch (error) {
-            return res.status(500).send({ error: 'Error on api' });
+            return res.status(error.status || 500).json({ message: error.message || 'Error on api' });
         }
     }
 
@@ -190,10 +191,10 @@ class TransactionsController {
 
             const { data } = await axios.get(`${api.bitcoinApi}BTC/ticker/`);
 
-            return res.send({ data });
+            return res.json(data);
 
         } catch (error) {
-            return res.status(500).send({ error: 'Error on api' });
+            return res.status(500).json({ message: error.message });
         }
     }
 
@@ -204,10 +205,10 @@ class TransactionsController {
 
             const { data } = await axios.get(`${api.bitcoinApi}BTC/trades/`);
 
-            return res.send({ data });
+            return res.json(data);
 
         } catch (error) {
-            return res.status(500).send({ error: 'Error on api' });
+            return res.status(error.status || 500).json({ message: error.message || 'Error on api' });
         }
     }
 
