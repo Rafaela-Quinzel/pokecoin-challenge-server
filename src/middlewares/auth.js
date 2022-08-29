@@ -1,26 +1,28 @@
 const jwt = require('jsonwebtoken');
+
 const authConfig = require('../config/auth.json');
+const CustomError = require('../helpers/customError')
 
 
 module.exports = (req, res, next) => {
-    
-    if (!('authorization' in req.headers)) return res.status(401).send({ error: 'Not authorized, please login' });
+ 
+    if (!('authorization' in req.headers)) throw new CustomError('Not authorized, please login', 401);
 
     const authHeader = req.headers.authorization;
     const parts = authHeader.split(' ');
     const [scheme, token] = parts;
     
-    if (typeof authHeader == 'undefined' || authHeader == null || authHeader == '') return res.status(401).send({ error: 'Not authorized, please login' });
+    if (typeof authHeader == 'undefined' || authHeader == null || authHeader == '') throw new CustomError('Not authorized, please login', 401);
     
-    if (!authHeader) return res.status(401).send({ error: 'No token provided' });
+    if (!authHeader) throw new CustomError('No token provided', 401);
 
-    if (!parts.length === 2) return res.status(401).send({ error: 'Token error' });
+    if (!parts.length === 2) throw new CustomError('Token error', 401);
 
     //regex para verificar se começa com Bearer
-    if (!/^Bearer$/i.test(scheme)) return res.status(401).send({ error: 'Token malformatted' });
+    if (!/^Bearer$/i.test(scheme)) throw new CustomError('Token malformatted', 401);
 
     jwt.verify(token, authConfig.secret, (error, decoded) => {
-        if (error) return res.status(401).send({ error: 'Token Invalid' });
+        if (error) throw new CustomError(error.message, 401);
 
         req.userId = decoded.id;
     });

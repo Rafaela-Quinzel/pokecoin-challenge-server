@@ -20,10 +20,10 @@ class PokemonController {
                 types: data.types
             }
 
-            return res.send({ pokemon });
+            return res.json({ pokemon });
 
         } catch (error) {
-            return res.status(500).send({ error: 'Error on api' });
+            return res.status(error.status || 500).json({ message: error.message || 'Error on api' });
         }
     }
 
@@ -35,12 +35,12 @@ class PokemonController {
             let userId = req.userId;
 
             const user = await helpers.getUserById(userId);
-            const userPokemonList = user.wallet;
-         
-            return res.send({ userPokemonList });
+            const userPokemonList = user?.wallet;
+
+            return res.json({ userPokemonList });
 
         } catch (error) {
-            return res.status(500).send({ error: 'Error on api' });
+            return res.status(error.status || 500).json({ message: error.message || 'Error on api' });
         }
     }
 
@@ -64,11 +64,11 @@ class PokemonController {
                 });
 
             })).then((pokemons) => {
-                return res.send({ pokemons });
+                return res.json({ pokemons });
             });
 
         } catch (error) {
-            return res.status(500).send({ error: 'Error on api' });
+            return res.status(error.status || 500).json({ message: error.message || 'Error on api' });
         }
     }
 }
