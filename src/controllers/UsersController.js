@@ -37,7 +37,7 @@ class UsersController {
 
             if (!user) return res.status(400).json({ message: error.message || 'User not found' });
            
-            if (!await bcrypt.compare(password, user.password)) return res.status(400).send({ error: 'Invalid user or password' });
+            if (!await bcrypt.compare(password, user.password)) return res.status(400).json({ error: 'Invalid user or password' });
             
             user.password = undefined;
 

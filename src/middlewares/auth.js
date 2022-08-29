@@ -5,8 +5,7 @@ const CustomError = require('../helpers/customError')
 
 
 module.exports = (req, res, next) => {
-    console.log('req.headers: ', req.headers.authorization)
-    
+ 
     if (!('authorization' in req.headers)) throw new CustomError('Not authorized, please login', 401);
 
     const authHeader = req.headers.authorization;

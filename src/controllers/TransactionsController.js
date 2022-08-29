@@ -14,7 +14,7 @@ class TransactionsController {
 
             let userId = req.userId;
 
-            const { pokemonId } = req.body.pokemon;
+            const { pokemonId } = req.body.pokemon.id;
 
             const user = await helpers.getUserById(userId);
             const userWallet = user?.wallet;
@@ -176,9 +176,9 @@ class TransactionsController {
             let userId = req.userId;
 
             const transactions = await helpers.getTransactionsUser(userId);
-        
+
             return res.json(transactions);
-            
+
         } catch (error) {
             return res.status(error.status || 500).json({ message: error.message || 'Error on api' });
         }
