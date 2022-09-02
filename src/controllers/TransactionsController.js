@@ -1,9 +1,9 @@
 const api = require('../config/api');
 const axios = require('axios');
 
-const User = require('../models/userSchema');
+const User = require('../schemas/userSchema');
 const helpers = require('../helpers/functions');
-const transactions = require('../models/transactionsSchema');
+const transactions = require('../schemas/transactionsSchema');
 
 class TransactionsController {
 

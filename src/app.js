@@ -9,7 +9,6 @@ const indexRouter = require('./routes/index');
 const mongodb = require('./config/mongodb');
 const DATABASE_URL = process.env.DB_URL_DATABASE || mongodb.mongodb_host;
 const PORT = process.env.PORT || '27017';
-//const PORT = mongodb.mongodb_port;
 
 const app = express();
 
