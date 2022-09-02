@@ -1,15 +1,6 @@
-const jwt = require('jsonwebtoken');
+const User = require('../schemas/userSchema');
+const Transactions = require('../schemas/transactionsSchema');
 
-const authConfig = require('../config/auth.json');
-const User = require('../models/userSchema');
-const Transactions = require('../models/transactionsSchema');
-
-
-async function generateToken(params = {}) {
-    return jwt.sign(params, authConfig.secret, {
-        expiresIn: 86400,
-    });
-}
 
 async function getUserById(userId) {
     const user = await User.findOne({_id: userId});
@@ -26,7 +17,6 @@ async function getTransactionsUser(userId) {
 
 
 module.exports = {
-    generateToken,
     getUserById,
     getTransactionsUser
 } 

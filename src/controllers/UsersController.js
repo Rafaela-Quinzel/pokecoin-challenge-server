@@ -1,18 +1,20 @@
 const bcrypt = require('bcryptjs');
 
-const User = require('../models/userSchema');
+const User = require('../schemas/userSchema');
 const helpers = require('../helpers/functions');
+const helper_jwt = require('../helpers/helper_jwt');
+const CustomError = require('../helpers/customError');
 
 class UsersController {
     static async register(req, res, next) {
 
-        const { email } = req.body;
-
         try {
 
-            let userEmail = await User.findOne({ email })
+            const { email } = req.body;
 
-            if (userEmail) return res.status(400).json({ message: error.message || 'User already exists' });
+            let userEmail = await User.findOne({ email });
+
+            if (userEmail) throw new CustomError('User already exists', 400 );
 
             const user = await User.create(req.body);
 
@@ -20,7 +22,7 @@ class UsersController {
 
             return res.json({
                 user,
-                token: await helpers.generateToken({ id: user._id })
+                token: await helper_jwt.generateToken({ id: user._id })
             });
 
         } catch (error) {
@@ -30,20 +32,22 @@ class UsersController {
 
     static async login(req, res, next) {
 
-        const { email, password } = req.body;
-
         try {
+
+            const { email, password } = req.body;
+
             const user = await User.findOne({ email }).select('+password');
 
-            if (!user) return res.status(400).json({ message: error.message || 'User not found' });
+            if (!user) throw new CustomError('User not found', 404);
+
            
-            if (!await bcrypt.compare(password, user.password)) return res.status(400).json({ error: 'Invalid user or password' });
+            if (!await bcrypt.compare(password, user.password)) throw new CustomError('Invalid user or password', 400);
             
             user.password = undefined;
 
             return res.json({
                 user,
-                token: await helpers.generateToken({ id: user._id })
+                token: await helper_jwt.generateToken({ id: user._id })
             });
 
         } catch (error) {

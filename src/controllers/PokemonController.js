@@ -2,6 +2,7 @@ const api = require('../config/api');
 const axios = require('axios');
 
 const helpers = require('../helpers/functions');
+const CustomError = require('../helpers/customError');
 
 class PokemonController {
     static async getById(req, res, next) {
@@ -11,6 +12,8 @@ class PokemonController {
             let pokemonId = req.params.id;
 
             const { data } = await axios.get(`${api.pokemonApi}pokemon/${pokemonId}`);
+
+            if (!data) throw new CustomError('Pokemon not found', 404);
 
             let pokemon = {
                 id: data.id,
@@ -37,6 +40,8 @@ class PokemonController {
             const user = await helpers.getUserById(userId);
             const userPokemonList = user?.wallet;
 
+            if (!userPokemonList) throw new CustomError('No pokemon found', 404);
+
             return res.json({ userPokemonList });
 
         } catch (error) {
@@ -46,9 +51,9 @@ class PokemonController {
 
     static async getAll(req, res, next) {
 
-        const { limit, page } = req.query;
-
         try {
+
+            const { limit, page } = req.query;
 
             const { data } = await axios.get(`${api.pokemonApi}pokemon?limit=${limit}&offset=${Number(page) * Number(limit)}`);
 

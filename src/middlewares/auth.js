@@ -1,7 +1,6 @@
 const jwt = require('jsonwebtoken');
-
-const authConfig = require('../config/auth.json');
-const CustomError = require('../helpers/customError')
+const secret = require('../config/secret');
+const CustomError = require('../helpers/customError');
 
 
 module.exports = (req, res, next) => {
@@ -21,7 +20,8 @@ module.exports = (req, res, next) => {
     //regex para verificar se começa com Bearer
     if (!/^Bearer$/i.test(scheme)) throw new CustomError('Token malformatted', 401);
 
-    jwt.verify(token, authConfig.secret, (error, decoded) => {
+    jwt.verify(token, secret.aes, (error, decoded) => {
+
         if (error) throw new CustomError(error.message, 401);
 
         req.userId = decoded.id;
