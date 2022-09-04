@@ -23,7 +23,7 @@ class PokemonController {
                 types: data.types
             }
 
-            return res.json({ pokemon });
+            return res.status(200).json({ pokemon });
 
         } catch (error) {
             return res.status(error.status || 500).json({ message: error.message || 'Error on api' });
@@ -42,7 +42,7 @@ class PokemonController {
 
             if (!userPokemonList) throw new CustomError('No pokemon found', 404);
 
-            return res.json({ userPokemonList });
+            return res.status(200).json({ userPokemonList });
 
         } catch (error) {
             return res.status(error.status || 500).json({ message: error.message || 'Error on api' });
@@ -69,7 +69,7 @@ class PokemonController {
                 });
 
             })).then((pokemons) => {
-                return res.json({ pokemons });
+                return res.status(200).json({ pokemons });
             });
 
         } catch (error) {

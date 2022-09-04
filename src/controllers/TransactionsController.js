@@ -51,7 +51,7 @@ class TransactionsController {
 
                 await transactions.create(data);
 
-                return res.json(updatePokemon);
+                return res.status(201).json(updatePokemon);
 
             } else if (!verifyUserHasPokemon) {
 
@@ -81,7 +81,7 @@ class TransactionsController {
 
                 await transactions.create(data);
 
-                return res.json(updateWallet);
+                return res.status(201).json(updateWallet);
             }
 
         } catch (error) {
@@ -91,6 +91,7 @@ class TransactionsController {
 
     //vender
     static async createSell(req, res, next) {
+
         try {
 
             let userId = req.userId;
@@ -116,11 +117,11 @@ class TransactionsController {
                     {
                         $pull: {
                             wallet: {
-                                pokemonID: verifyUserHasPokemon.pokemonId,
-                                pokemonName: verifyUserHasPokemon.name,
-                                pokemonImage: verifyUserHasPokemon.image,
-                                pokemonBaseXP: verifyUserHasPokemon.baseXP,
-                                pokemonTypes: verifyUserHasPokemon.types,
+                                pokemonId: verifyUserHasPokemon.pokemonId,
+                                pokemonName: verifyUserHasPokemon.pokemonName,
+                                pokemonImage: verifyUserHasPokemon.pokemonImage,
+                                pokemonBaseXP: verifyUserHasPokemon.pokemonBaseXP,
+                                pokemonTypes: verifyUserHasPokemon.pokemonTypes,
                                 quotas: verifyUserHasPokemon.quotas,
                                 value: verifyUserHasPokemon.value,
                             }
@@ -133,13 +134,13 @@ class TransactionsController {
                     name: req.body.pokemon.name,
                     pokemonId: req.body.pokemon.id,
                     BTCDay: req.body.info.BTCDay,
-                    quotas: req.body.info.quotas,
+                    quotas: quotas,
                     value: req.body.info.value,
                 };
 
                 await transactions.create(data);
 
-                return res.json(removePokemon);
+                return res.status(201).json(removePokemon);
 
             } else {
                 const updatePokemon = await User.updateOne(
@@ -163,7 +164,7 @@ class TransactionsController {
 
                 await transactions.create(data);
 
-                return res.json(updatePokemon);
+                return res.status(201).json(updatePokemon);
             }
 
         } catch (error) {
@@ -177,7 +178,7 @@ class TransactionsController {
 
             const transactions = await helpers.getTransactionsUser(userId);
 
-            return res.json(transactions);
+            return res.status(200).json(transactions);
 
         } catch (error) {
             return res.status(error.status || 500).json({ message: error.message || 'Error on api' });
@@ -191,7 +192,7 @@ class TransactionsController {
 
             const { data } = await axios.get(`${api.bitcoinApi}BTC/ticker/`);
 
-            return res.json(data);
+            return res.status(200).json(data);
 
         } catch (error) {
             return res.status(500).json({ message: error.message });
@@ -205,7 +206,7 @@ class TransactionsController {
 
             const { data } = await axios.get(`${api.bitcoinApi}BTC/trades/`);
 
-            return res.json(data);
+            return res.status(200).json(data);
 
         } catch (error) {
             return res.status(error.status || 500).json({ message: error.message || 'Error on api' });
