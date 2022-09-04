@@ -13,18 +13,20 @@ class TransactionsController {
         try {
 
             let userId = req.userId;
-
-            const { pokemonId } = req.body.pokemon.id;
-
+            
+            const pokemonId = req.body.pokemon.id;
+            
             const user = await helpers.getUserById(userId);
+    
             const userWallet = user?.wallet;
+          
             const verifyUserHasPokemon = userWallet.find(wallet => wallet.pokemonId === pokemonId);
-
+            
             if (verifyUserHasPokemon) {
 
                 let { quotas, value } = verifyUserHasPokemon;
 
-                quotas = quotas + req.body.info.quotas;
+                quotas = Number(quotas) + Number(req.body.info.quotas);
 
                 const newValue = Number(value) + Number(req.body.info.value);
 
