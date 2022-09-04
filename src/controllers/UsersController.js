@@ -20,7 +20,7 @@ class UsersController {
 
             user.password = undefined;
 
-            return res.json({
+            return res.status(201).json({
                 user,
                 token: await helper_jwt.generateToken({ id: user._id })
             });
@@ -45,7 +45,7 @@ class UsersController {
             
             user.password = undefined;
 
-            return res.json({
+            return res.status(200).json({
                 user,
                 token: await helper_jwt.generateToken({ id: user._id })
             });
